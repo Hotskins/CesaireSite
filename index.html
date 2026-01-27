@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stages Lille • Trouve ton stage facilement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E85A28;
+            --secondary: #004E89;
+            --accent: #FFD23F;
+            --bg: #FAFBFC;
+            --surface: #FFFFFF;
+            --text: #1A1A1A;
+            --text-muted: #6B7280;
+            --border: #E5E7EB;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --metro-blue: #0055A4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Epilogue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary) 0%, #003366 100%);
+            padding: 4rem 2rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 210, 63, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .metro-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .metro-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--shadow);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Epilogue', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg);
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
+        .btn-search {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-search:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-search:active {
+            transform: translateY(0);
+        }
+
+        /* Results Section */
+        .results-section {
+            padding: 3rem 2rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .results-count {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .results-count strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .company-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.8rem;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out backwards;
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .company-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 12px 40px var(--shadow);
+            transform: translateY(-4px);
+        }
+
+        .company-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .company-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .company-sector {
+            display: inline-block;
+            background: var(--bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .metro-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .metro-line {
+            background: var(--metro-blue);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .company-address {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: start;
+            gap: 0.5rem;
+        }
+
+        .company-description {
+            color: var(--text);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .company-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .meta-icon {
+            font-size: 1.1rem;
+        }
+
+        .btn-contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-contact:hover {
+            background: var(--primary-dark);
+            transform: translateX(4px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            padding: 2rem;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border-radius: 20px;
+            max-width: 700px;
+            width: 100%;
+            padding: 2.5rem;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--bg);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--border);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .modal-section p, .modal-section ul {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .modal-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .modal-section ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-section ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .contact-info {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-details a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add Company Button */
+        .btn-add-company {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, #FFC107 100%);
+            color: var(--secondary);
+            border: none;
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(255, 210, 63, 0.5);
+            transition: all 0.3s ease;
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-add-company:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 12px 40px rgba(255, 210, 63, 0.6);
+        }
+
+        .btn-add-company:active {
+            transform: scale(0.95) rotate(90deg);
+        }
+
+        /* Add Company Form */
+        .add-form-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .add-form-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .add-form-section input,
+        .add-form-section select,
+        .add-form-section textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Epilogue', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: var(--bg);
+        }
+
+        .add-form-section textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .add-form-section input:focus,
+        .add-form-section select:focus,
+        .add-form-section textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255, 210, 63, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-submit-company {
+            background: linear-gradient(135deg, var(--accent) 0%, #FFC107 100%);
+            color: var(--secondary);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 210, 63, 0.3);
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-submit-company:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 210, 63, 0.4);
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .demo-notice {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: start;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .demo-notice-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 1.5rem 5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .search-section {
+                padding: 1.5rem;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .modal-content {
+                padding: 2rem;
+            }
+
+            .modal-title {
+                font-size: 1.6rem;
+            }
+
+            .btn-add-company {
+                bottom: 70px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations delay for cards */
+        .company-card:nth-child(1) { animation-delay: 0.1s; }
+        .company-card:nth-child(2) { animation-delay: 0.15s; }
+        .company-card:nth-child(3) { animation-delay: 0.2s; }
+        .company-card:nth-child(4) { animation-delay: 0.25s; }
+        .company-card:nth-child(5) { animation-delay: 0.3s; }
+        .company-card:nth-child(6) { animation-delay: 0.35s; }
+
+        /* Demo watermark */
+        .demo-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 900;
+            color: rgba(255, 107, 53, 0.08);
+            z-index: 9999;
+            pointer-events: none;
+            user-select: none;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            font-family: 'Epilogue', sans-serif;
+        }
+
+        .demo-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FF6B35 0%, #E85A28 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        .demo-banner::before {
+            content: '⚠️';
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .demo-watermark {
+                font-size: clamp(3rem, 12vw, 8rem);
+            }
+            
+            .demo-banner {
+                bottom: 10px;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.85rem;
+                max-width: 90%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Watermark -->
+    <div class="demo-watermark">DEMO</div>
+    <div class="demo-banner">
+        VERSION DÉMO • Toutes les entreprises sont fictives
+    </div>
+
+    <!-- Add Company Button -->
+    <button class="btn-add-company" onclick="openAddCompanyModal()" title="Ajouter une entreprise (DEMO)">
+        +
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="metro-badge">
+                    <div class="metro-icon">M</div>
+                    Recherche par station de métro
+                </div>
+                <h1>Trouve ton stage à Lille</h1>
+                <p class="hero-subtitle">Recherche d'entreprises par proximité • Simple et rapide • Pour lycéens</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <div class="container">
+        <div class="search-section">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="metro-filter">🚇 Station de métro</label>
+                    <select id="metro-filter">
+                        <option value="">Toutes les stations</option>
+                        <option value="Gare Lille Flandres">Gare Lille Flandres</option>
+                        <option value="République – Beaux-Arts">République – Beaux-Arts</option>
+                        <option value="Porte des Postes">Porte des Postes</option>
+                        <option value="Rihour">Rihour</option>
+                        <option value="Gambetta">Gambetta</option>
+                        <option value="Mairie de Lille">Mairie de Lille</option>
+                        <option value="Wazemmes">Wazemmes</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sector-filter">💼 Secteur d'activité</label>
+                    <select id="sector-filter">
+                        <option value="">Tous les secteurs</option>
+                        <option value="IT">Informatique / IT</option>
+                        <option value="Médecine">Médecine / Santé</option>
+                        <option value="Automobile">Automobile / Technique</option>
+                        <option value="Commerce">Commerce / Vente</option>
+                        <option value="Administration">Administration</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="search-input">🔍 Recherche par nom</label>
+                    <input type="text" id="search-input" placeholder="Nom de l'entreprise...">
+                </div>
+            </div>
+            <button class="btn-search" onclick="filterCompanies()">Rechercher</button>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <section class="results-section">
+        <div class="container">
+            <div class="results-header">
+                <div class="results-count">
+                    <strong id="results-count">12</strong> opportunités de stage trouvées
+                </div>
+            </div>
+            <div class="companies-grid" id="companies-grid">
+                <!-- Cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="company-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div id="modal-body">
+                <!-- Content will be inserted by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Stages Lille • 2025 • Projet pour faciliter la recherche de stages obligatoires</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+            Des questions ? Contactez votre établissement ou <a href="mailto:contact@stages-lille.fr">contact@stages-lille.fr</a>
+        </p>
+    </footer>
+
+    <script>
+        // Database of companies
+        const companies = [
+            {
+                id: 1,
+                name: "LilleTech Solutions",
+                sector: "IT",
+                metro: "Gare Lille Flandres",
+                address: "12 Rue de Paris, 59000 Lille",
+                description: "Petite entreprise IT spécialisée en développement web et applications mobiles.",
+                duration: "1-2 semaines",
+                email: "contact@lilletech.fr",
+                phone: "03 20 12 34 56",
+                tasks: [
+                    "Découverte des métiers du numérique",
+                    "Assistance à l'équipe de développement",
+                    "Participation aux réunions de projet",
+                    "Observation du processus de création d'applications"
+                ],
+                requirements: [
+                    "Curiosité pour les nouvelles technologies",
+                    "Aucune compétence technique requise",
+                    "Motivation et sérieux"
+                ],
+                schedule: "Lundi à vendredi, 9h-17h"
+            },
+            {
+                id: 2,
+                name: "Pharmacie du Centre",
+                sector: "Médecine",
+                metro: "République – Beaux-Arts",
+                address: "5 Place de la République, 59000 Lille",
+                description: "Pharmacie moderne au cœur de Lille, accueillant des stagiaires pour découvrir le métier.",
+                duration: "1 semaine",
+                email: "pharmacie.centre@exemple.fr",
+                phone: "03 20 55 66 77",
+                tasks: [
+                    "Observation du travail quotidien du pharmacien",
+                    "Aide à l'organisation des stocks",
+                    "Accueil des clients (sous supervision)",
+                    "Découverte de la gestion d'une officine"
+                ],
+                requirements: [
+                    "Intérêt pour le secteur de la santé",
+                    "Discrétion et respect de la confidentialité",
+                    "Bonne présentation"
+                ],
+                schedule: "Lundi à samedi, 9h-13h"
+            },
+            {
+                id: 3,
+                name: "AutoService Lille",
+                sector: "Automobile",
+                metro: "Porte des Postes",
+                address: "40 Rue d'Arras, 59000 Lille",
+                description: "Garage automobile avec une équipe de mécaniciens expérimentés.",
+                duration: "1-2 semaines",
+                email: "autoservice.lille@exemple.fr",
+                phone: "03 20 88 99 00",
+                tasks: [
+                    "Observation des réparations mécaniques",
+                    "Aide au diagnostic véhicule",
+                    "Découverte des outils professionnels",
+                    "Participation aux tests de routine"
+                ],
+                requirements: [
+                    "Intérêt pour la mécanique",
+                    "Tenue appropriée fournie",
+                    "Respect des consignes de sécurité"
+                ],
+                schedule: "Lundi à vendredi, 8h30-17h"
+            },
+            {
+                id: 4,
+                name: "Bureau d'Architecture Moderne",
+                sector: "Architecture",
+                metro: "Rihour",
+                address: "18 Rue Nationale, 59000 Lille",
+                description: "Cabinet d'architecture spécialisé en rénovation de bâtiments historiques.",
+                duration: "2 semaines",
+                email: "contact@archi-moderne.fr",
+                phone: "03 20 11 22 33",
+                tasks: [
+                    "Découverte du processus de conception",
+                    "Participation aux visites de chantier",
+                    "Aide à la préparation de maquettes",
+                    "Utilisation des logiciels de dessin (initiation)"
+                ],
+                requirements: [
+                    "Intérêt pour l'architecture et le design",
+                    "Créativité et sens de l'observation",
+                    "Travail en équipe"
+                ],
+                schedule: "Lundi à vendredi, 9h-18h"
+            },
+            {
+                id: 5,
+                name: "La Boutique du Vieux-Lille",
+                sector: "Commerce",
+                metro: "Rihour",
+                address: "25 Rue de la Monnaie, 59000 Lille",
+                description: "Boutique de décoration et d'artisanat local dans le Vieux-Lille.",
+                duration: "1-2 semaines",
+                email: "boutique.vieuxlille@exemple.fr",
+                phone: "03 20 44 55 66",
+                tasks: [
+                    "Accueil et conseil client",
+                    "Gestion de l'encaissement",
+                    "Mise en rayon et merchandising",
+                    "Découverte de la gestion de stock"
+                ],
+                requirements: [
+                    "Bon relationnel",
+                    "Présentation soignée",
+                    "Ponctualité et fiabilité"
+                ],
+                schedule: "Mardi à samedi, 10h-19h"
+            },
+            {
+                id: 6,
+                name: "Cabinet Juridique Delcourt",
+                sector: "Administration",
+                metro: "République – Beaux-Arts",
+                address: "30 Boulevard de la Liberté, 59000 Lille",
+                description: "Cabinet d'avocats spécialisé en droit des affaires et droit du travail.",
+                duration: "1 semaine",
+                email: "cabinet.delcourt@exemple.fr",
+                phone: "03 20 77 88 99",
+                tasks: [
+                    "Découverte du métier d'avocat",
+                    "Aide à la recherche documentaire",
+                    "Observation d'audiences (si possible)",
+                    "Classement et archivage de dossiers"
+                ],
+                requirements: [
+                    "Intérêt pour le droit",
+                    "Discrétion absolue",
+                    "Capacité de concentration"
+                ],
+                schedule: "Lundi à vendredi, 9h-17h"
+            },
+            {
+                id: 7,
+                name: "Restaurant Le Comptoir",
+                sector: "Restauration",
+                metro: "Gambetta",
+                address: "8 Avenue du Peuple Belge, 59000 Lille",
+                description: "Restaurant traditionnel français avec une cuisine maison.",
+                duration: "1 semaine",
+                email: "lecomptoir.lille@exemple.fr",
+                phone: "03 20 33 44 55",
+                tasks: [
+                    "Découverte du métier de cuisinier",
+                    "Aide à la préparation des ingrédients",
+                    "Observation du service en salle",
+                    "Apprentissage des règles d'hygiène"
+                ],
+                requirements: [
+                    "Motivation et dynamisme",
+                    "Respect des normes d'hygiène",
+                    "Capacité à travailler debout"
+                ],
+                schedule: "Du mardi au samedi, 10h-15h ou 18h-22h"
+            },
+            {
+                id: 8,
+                name: "Graphik Design Studio",
+                sector: "IT",
+                metro: "Wazemmes",
+                address: "15 Rue des Sarrazins, 59000 Lille",
+                description: "Studio de design graphique et communication visuelle.",
+                duration: "2 semaines",
+                email: "hello@graphikdesign.fr",
+                phone: "03 20 66 77 88",
+                tasks: [
+                    "Découverte des métiers du design",
+                    "Initiation aux logiciels créatifs",
+                    "Participation aux brainstormings",
+                    "Création de moodboards"
+                ],
+                requirements: [
+                    "Sensibilité artistique",
+                    "Curiosité créative",
+                    "Maîtrise basique de l'ordinateur"
+                ],
+                schedule: "Lundi à vendredi, 9h30-17h30"
+            },
+            {
+                id: 9,
+                name: "Laboratoire BioPharma",
+                sector: "Médecine",
+                metro: "Mairie de Lille",
+                address: "50 Rue du Molinel, 59000 Lille",
+                description: "Laboratoire d'analyses médicales moderne.",
+                duration: "1-2 semaines",
+                email: "contact@biopharma-lille.fr",
+                phone: "03 20 99 00 11",
+                tasks: [
+                    "Observation des analyses en laboratoire",
+                    "Découverte du matériel médical",
+                    "Accueil des patients",
+                    "Initiation aux procédures d'hygiène"
+                ],
+                requirements: [
+                    "Intérêt pour les sciences",
+                    "Rigueur et précision",
+                    "Respect des protocoles"
+                ],
+                schedule: "Lundi à vendredi, 8h-16h"
+            },
+            {
+                id: 10,
+                name: "Mairie de Lille - Service Jeunesse",
+                sector: "Administration",
+                metro: "Mairie de Lille",
+                address: "Place Augustin Laurent, 59000 Lille",
+                description: "Service municipal dédié aux activités et projets pour la jeunesse.",
+                duration: "2 semaines",
+                email: "jeunesse@mairie-lille.fr",
+                phone: "03 20 49 50 00",
+                tasks: [
+                    "Découverte du fonctionnement municipal",
+                    "Aide à l'organisation d'événements",
+                    "Accueil du public",
+                    "Participation aux projets jeunesse"
+                ],
+                requirements: [
+                    "Intérêt pour le service public",
+                    "Bon contact avec le public",
+                    "Esprit d'équipe"
+                ],
+                schedule: "Lundi à vendredi, 9h-17h"
+            },
+            {
+                id: 11,
+                name: "Librairie Pages & Compagnie",
+                sector: "Commerce",
+                metro: "Gambetta",
+                address: "22 Rue Solférino, 59000 Lille",
+                description: "Librairie indépendante avec un large choix de livres et BD.",
+                duration: "1-2 semaines",
+                email: "pages.compagnie@exemple.fr",
+                phone: "03 20 22 33 44",
+                tasks: [
+                    "Accueil et conseil aux clients",
+                    "Gestion des stocks de livres",
+                    "Mise en place des nouveautés",
+                    "Participation aux animations littéraires"
+                ],
+                requirements: [
+                    "Passion pour la lecture",
+                    "Bon sens du service",
+                    "Organisation et méthode"
+                ],
+                schedule: "Mardi à samedi, 10h-19h"
+            },
+            {
+                id: 12,
+                name: "Atelier Vélo Solidaire",
+                sector: "Automobile",
+                metro: "Wazemmes",
+                address: "35 Rue de Wazemmes, 59000 Lille",
+                description: "Atelier associatif de réparation et d'entretien de vélos.",
+                duration: "1 semaine",
+                email: "contact@velo-solidaire.fr",
+                phone: "03 20 55 66 77",
+                tasks: [
+                    "Apprentissage de la mécanique vélo",
+                    "Réparations simples (crevaisons, freins)",
+                    "Accueil des bénéficiaires",
+                    "Sensibilisation à l'éco-mobilité"
+                ],
+                requirements: [
+                    "Intérêt pour le vélo",
+                    "Esprit associatif",
+                    "Envie d'apprendre"
+                ],
+                schedule: "Mercredi et samedi, 14h-18h"
+            }
+        ];
+
+        let filteredCompanies = [...companies];
+
+        // Display companies
+        function displayCompanies(companiesToDisplay) {
+            const grid = document.getElementById('companies-grid');
+            const count = document.getElementById('results-count');
+            
+            if (companiesToDisplay.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3>Aucun résultat trouvé</h3>
+                        <p>Essayez de modifier vos critères de recherche</p>
+                    </div>
+                `;
+                count.textContent = '0';
+                return;
+            }
+
+            count.textContent = companiesToDisplay.length;
+            
+            grid.innerHTML = companiesToDisplay.map(company => `
+                <div class="company-card">
+                    <div class="company-header">
+                        <div>
+                            <h3 class="company-name">${company.name}</h3>
+                            <span class="company-sector">${company.sector}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metro-info">
+                        <span class="metro-line">M</span>
+                        <span>${company.metro}</span>
+                    </div>
+                    
+                    <div class="company-address">
+                        <span>📍</span>
+                        <span>${company.address}</span>
+                    </div>
+                    
+                    <p class="company-description">${company.description}</p>
+                    
+                    <div class="company-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span>${company.duration}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">📧</span>
+                            <span>Contact disponible</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-contact" onclick="openModal(${company.id})">
+                        Voir les détails →
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Filter companies
+        function filterCompanies() {
+            const metroFilter = document.getElementById('metro-filter').value;
+            const sectorFilter = document.getElementById('sector-filter').value;
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+
+            filteredCompanies = companies.filter(company => {
+                const matchesMetro = !metroFilter || company.metro === metroFilter;
+                const matchesSector = !sectorFilter || company.sector === sectorFilter;
+                const matchesSearch = !searchInput || company.name.toLowerCase().includes(searchInput);
+                
+                return matchesMetro && matchesSector && matchesSearch;
+            });
+
+            displayCompanies(filteredCompanies);
+        }
+
+        // Open modal with company details
+        function openModal(companyId) {
+            const company = companies.find(c => c.id === companyId);
+            if (!company) return;
+
+            const modal = document.getElementById('company-modal');
+            const modalBody = document.getElementById('modal-body');
+
+            modalBody.innerHTML = `
+                <div class="modal-header">
+                    <h2 class="modal-title">${company.name}</h2>
+                    <span class="company-sector">${company.sector}</span>
+                </div>
+
+                <div class="modal-section">
+                    <div class="metro-info">
+                        <span class="metro-line">M</span>
+                        <span>${company.metro}</span>
+                    </div>
+                    <div class="company-address" style="margin-top: 0.5rem;">
+                        <span>📍</span>
+                        <span>${company.address}</span>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>À propos</h3>
+                    <p>${company.description}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Ce que tu feras</h3>
+                    <ul>
+                        ${company.tasks.map(task => `<li>${task}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Ce qu'on attend de toi</h3>
+                    <ul>
+                        ${company.requirements.map(req => `<li>${req}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Informations pratiques</h3>
+                    <p><strong>Durée :</strong> ${company.duration}</p>
+                    <p><strong>Horaires :</strong> ${company.schedule}</p>
+                </div>
+
+                <div class="contact-info">
+                    <h3 style="margin-bottom: 1rem;">Contact</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <div style="font-weight: 600;">Email</div>
+                            <a href="mailto:${company.email}">${company.email}</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <div style="font-weight: 600;">Téléphone</div>
+                            <a href="tel:${company.phone}">${company.phone}</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Open add company modal
+        function openAddCompanyModal() {
+            const modal = document.getElementById('company-modal');
+            const modalBody = document.getElementById('modal-body');
+
+            modalBody.innerHTML = `
+                <div class="modal-header">
+                    <h2 class="modal-title">Ajouter une entreprise</h2>
+                </div>
+
+                <div class="demo-notice">
+                    <div class="demo-notice-icon">⚠️</div>
+                    <div>
+                        <strong>Mode DEMO :</strong> Cette entreprise sera ajoutée temporairement et disparaîtra 
+                        au rafraîchissement de la page. Dans la version réelle, elle serait enregistrée dans une base de données.
+                    </div>
+                </div>
+
+                <div id="success-container"></div>
+
+                <form id="add-company-form" onsubmit="handleAddCompany(event)">
+                    <div class="add-form-section">
+                        <label for="company-name">Nom de l'entreprise *</label>
+                        <input type="text" id="company-name" required placeholder="Ex: Mon Entreprise SARL">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="add-form-section">
+                            <label for="company-sector">Secteur d'activité *</label>
+                            <select id="company-sector" required>
+                                <option value="">Choisir un secteur</option>
+                                <option value="IT">Informatique / IT</option>
+                                <option value="Médecine">Médecine / Santé</option>
+                                <option value="Automobile">Automobile / Technique</option>
+                                <option value="Commerce">Commerce / Vente</option>
+                                <option value="Administration">Administration</option>
+                                <option value="Restauration">Restauration</option>
+                                <option value="Architecture">Architecture</option>
+                            </select>
+                        </div>
+
+                        <div class="add-form-section">
+                            <label for="company-metro">Station de métro *</label>
+                            <select id="company-metro" required>
+                                <option value="">Choisir une station</option>
+                                <option value="Gare Lille Flandres">Gare Lille Flandres</option>
+                                <option value="République – Beaux-Arts">République – Beaux-Arts</option>
+                                <option value="Porte des Postes">Porte des Postes</option>
+                                <option value="Rihour">Rihour</option>
+                                <option value="Gambetta">Gambetta</option>
+                                <option value="Mairie de Lille">Mairie de Lille</option>
+                                <option value="Wazemmes">Wazemmes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="add-form-section">
+                        <label for="company-address">Adresse complète *</label>
+                        <input type="text" id="company-address" required placeholder="Ex: 15 Rue de la Paix, 59000 Lille">
+                    </div>
+
+                    <div class="add-form-section">
+                        <label for="company-description">Description de l'entreprise *</label>
+                        <textarea id="company-description" required placeholder="Décrivez brièvement l'activité de votre entreprise..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="add-form-section">
+                            <label for="company-duration">Durée du stage *</label>
+                            <input type="text" id="company-duration" required placeholder="Ex: 1-2 semaines">
+                        </div>
+
+                        <div class="add-form-section">
+                            <label for="company-schedule">Horaires *</label>
+                            <input type="text" id="company-schedule" required placeholder="Ex: Lundi à vendredi, 9h-17h">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="add-form-section">
+                            <label for="company-email">Email de contact *</label>
+                            <input type="email" id="company-email" required placeholder="contact@entreprise.fr">
+                        </div>
+
+                        <div class="add-form-section">
+                            <label for="company-phone">Téléphone *</label>
+                            <input type="tel" id="company-phone" required placeholder="03 20 12 34 56">
+                        </div>
+                    </div>
+
+                    <div class="add-form-section">
+                        <label for="company-tasks">Tâches du stagiaire (une par ligne)</label>
+                        <textarea id="company-tasks" placeholder="Exemple:
+Découverte du métier
+Aide à l'équipe
+Participation aux projets"></textarea>
+                    </div>
+
+                    <div class="add-form-section">
+                        <label for="company-requirements">Prérequis (une par ligne)</label>
+                        <textarea id="company-requirements" placeholder="Exemple:
+Motivation et curiosité
+Aucune expérience requise
+Ponctualité"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-company">
+                        ✨ Ajouter l'entreprise (DEMO)
+                    </button>
+                </form>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Handle add company form submission
+        function handleAddCompany(event) {
+            event.preventDefault();
+
+            // Get form values
+            const newCompany = {
+                id: companies.length + 1,
+                name: document.getElementById('company-name').value,
+                sector: document.getElementById('company-sector').value,
+                metro: document.getElementById('company-metro').value,
+                address: document.getElementById('company-address').value,
+                description: document.getElementById('company-description').value,
+                duration: document.getElementById('company-duration').value,
+                email: document.getElementById('company-email').value,
+                phone: document.getElementById('company-phone').value,
+                schedule: document.getElementById('company-schedule').value,
+                tasks: document.getElementById('company-tasks').value
+                    .split('\n')
+                    .filter(task => task.trim())
+                    .map(task => task.trim()) || ['Détails à préciser'],
+                requirements: document.getElementById('company-requirements').value
+                    .split('\n')
+                    .filter(req => req.trim())
+                    .map(req => req.trim()) || ['À définir avec l\'entreprise']
+            };
+
+            // Add to companies array
+            companies.push(newCompany);
+            filteredCompanies = [...companies];
+
+            // Show success message
+            const successContainer = document.getElementById('success-container');
+            successContainer.innerHTML = `
+                <div class="success-message">
+                    <span style="font-size: 1.5rem;">✅</span>
+                    <div>
+                        <strong>Entreprise ajoutée avec succès !</strong><br>
+                        <span style="font-size: 0.9rem; opacity: 0.9;">Vous pouvez maintenant fermer cette fenêtre pour voir le résultat.</span>
+                    </div>
+                </div>
+            `;
+
+            // Reset form
+            document.getElementById('add-company-form').reset();
+
+            // Refresh display
+            displayCompanies(filteredCompanies);
+
+            // Auto close after 2 seconds
+            setTimeout(() => {
+                closeModal();
+                // Scroll to new company
+                setTimeout(() => {
+                    const cards = document.querySelectorAll('.company-card');
+                    if (cards.length > 0) {
+                        cards[cards.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 300);
+            }, 2000);
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('company-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('company-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Real-time search
+        document.getElementById('search-input').addEventListener('input', filterCompanies);
+        document.getElementById('metro-filter').addEventListener('change', filterCompanies);
+        document.getElementById('sector-filter').addEventListener('change', filterCompanies);
+
+        // Initial display
+        displayCompanies(filteredCompanies);
+    </script>
+</body>
+</html>
