@@ -20,6 +20,10 @@
             --border: #E5E7EB;
             --shadow: rgba(0, 0, 0, 0.08);
             --metro-blue: #0055A4;
+            --admin-bg: #0F172A;
+            --admin-surface: #111827;
+            --admin-border: rgba(148, 163, 184, 0.22);
+            --admin-text: #E5E7EB;
         }
 
         * {
@@ -688,6 +692,209 @@
             flex-shrink: 0;
         }
 
+
+
+        /* Admin Panel */
+        .btn-admin {
+            position: fixed;
+            bottom: 155px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            border: none;
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.45);
+            z-index: 9998;
+            transition: all 0.3s ease;
+        }
+
+        .btn-admin:hover {
+            transform: translateY(-4px);
+        }
+
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            right: -440px;
+            width: min(92vw, 420px);
+            height: 100vh;
+            background: linear-gradient(160deg, var(--admin-bg) 0%, #020617 100%);
+            color: var(--admin-text);
+            border-left: 1px solid var(--admin-border);
+            box-shadow: -16px 0 40px rgba(2, 6, 23, 0.45);
+            z-index: 10001;
+            transition: right 0.35s ease;
+            padding: 1.3rem;
+            overflow-y: auto;
+        }
+
+        .admin-panel.active {
+            right: 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .admin-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .admin-close {
+            border: 1px solid var(--admin-border);
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--admin-text);
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .admin-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .admin-kpi {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid var(--admin-border);
+            border-radius: 14px;
+            padding: 0.85rem;
+        }
+
+        .admin-kpi-label {
+            color: #93C5FD;
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .admin-kpi-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .sector-bars {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid var(--admin-border);
+            border-radius: 14px;
+            padding: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .sector-row {
+            display: grid;
+            grid-template-columns: 90px 1fr 35px;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.55rem;
+            font-size: 0.8rem;
+        }
+
+        .sector-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .sector-track {
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 999px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .sector-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #38BDF8 0%, #818CF8 100%);
+        }
+
+        .admin-list {
+            display: grid;
+            gap: 0.65rem;
+        }
+
+        .admin-item {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 0.75rem;
+        }
+
+        .admin-item-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .admin-item-name {
+            font-weight: 700;
+            font-size: 0.93rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.35rem;
+        }
+
+        .admin-action {
+            border: none;
+            border-radius: 8px;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .admin-action.feature {
+            background: #FACC15;
+            color: #111827;
+        }
+
+        .admin-action.delete {
+            background: #DC2626;
+            color: #fff;
+        }
+
+        .admin-note {
+            font-size: 0.75rem;
+            color: #93C5FD;
+        }
+
+        .hero-mode-toggle {
+            margin-top: 1rem;
+            display: inline-flex;
+            gap: 0.55rem;
+            align-items: center;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.08);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        body.night-mode {
+            --bg: #0F172A;
+            --surface: #1E293B;
+            --text: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border: #334155;
+            --shadow: rgba(2, 6, 23, 0.4);
+        }
+
         /* Footer */
         footer {
             background: var(--secondary);
@@ -743,6 +950,14 @@
                 width: 55px;
                 height: 55px;
                 font-size: 1.8rem;
+            }
+
+            .btn-admin {
+                bottom: 135px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                border-radius: 16px;
             }
 
             .form-row {
@@ -836,6 +1051,18 @@
         +
     </button>
 
+    <button class="btn-admin" onclick="toggleAdminPanel()" title="Ouvrir le panneau admin">🛠️</button>
+
+    <aside class="admin-panel" id="admin-panel">
+        <div class="admin-header">
+            <h2 class="admin-title">Admin Dashboard</h2>
+            <button class="admin-close" onclick="toggleAdminPanel(false)">✕</button>
+        </div>
+        <div class="admin-kpi-grid" id="admin-kpi-grid"></div>
+        <div class="sector-bars" id="admin-sector-bars"></div>
+        <div class="admin-list" id="admin-company-list"></div>
+    </aside>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -848,6 +1075,7 @@
 
 
                 <p class="hero-subtitle">Recherche d'entreprises par proximité • Simple et rapide • Pour lycéens</p>
+                <button class="hero-mode-toggle" onclick="toggleNightMode()">🌙 Mode soirée</button>
             </div>
         </div>
     </section>
@@ -1223,11 +1451,11 @@
 
             count.textContent = companiesToDisplay.length;
             
-            grid.innerHTML = companiesToDisplay.map(company => `
+            grid.innerHTML = [...companiesToDisplay].sort((a, b) => Number(Boolean(b.isFeatured)) - Number(Boolean(a.isFeatured))).map(company => `
                 <div class="company-card">
                     <div class="company-header">
                         <div>
-                            <h3 class="company-name">${company.name}</h3>
+                            <h3 class="company-name">${company.isFeatured ? '⭐ ' : ''}${company.name}</h3>
                             <span class="company-sector">${company.sector}</span>
                         </div>
                     </div>
@@ -1488,6 +1716,7 @@ Ponctualité"></textarea>
                     .split('\n')
                     .filter(task => task.trim())
                     .map(task => task.trim()) || ['Détails à préciser'],
+                isFeatured: false,
                 requirements: document.getElementById('company-requirements').value
                     .split('\n')
                     .filter(req => req.trim())
@@ -1555,8 +1784,113 @@ Ponctualité"></textarea>
         document.getElementById('metro-filter').addEventListener('change', filterCompanies);
         document.getElementById('sector-filter').addEventListener('change', filterCompanies);
 
+
+
+        function getSectorBreakdown() {
+            return companies.reduce((acc, company) => {
+                acc[company.sector] = (acc[company.sector] || 0) + 1;
+                return acc;
+            }, {});
+        }
+
+        function renderAdminDashboard() {
+            const kpiContainer = document.getElementById('admin-kpi-grid');
+            const sectorContainer = document.getElementById('admin-sector-bars');
+            const listContainer = document.getElementById('admin-company-list');
+
+            if (!kpiContainer || !sectorContainer || !listContainer) return;
+
+            const uniqueMetros = new Set(companies.map(company => company.metro)).size;
+            const featured = companies.filter(company => company.isFeatured).length;
+            const averageTasks = (companies.reduce((sum, company) => sum + company.tasks.length, 0) / companies.length).toFixed(1);
+
+            kpiContainer.innerHTML = `
+                <div class="admin-kpi">
+                    <div class="admin-kpi-label">Entreprises</div>
+                    <div class="admin-kpi-value">${companies.length}</div>
+                </div>
+                <div class="admin-kpi">
+                    <div class="admin-kpi-label">Stations couvertes</div>
+                    <div class="admin-kpi-value">${uniqueMetros}</div>
+                </div>
+                <div class="admin-kpi">
+                    <div class="admin-kpi-label">Opportunités premium</div>
+                    <div class="admin-kpi-value">${featured}</div>
+                </div>
+                <div class="admin-kpi">
+                    <div class="admin-kpi-label">Tâches / stage</div>
+                    <div class="admin-kpi-value">${averageTasks}</div>
+                </div>
+            `;
+
+            const sectorBreakdown = getSectorBreakdown();
+            const max = Math.max(...Object.values(sectorBreakdown));
+            sectorContainer.innerHTML = `<h3 style="margin-bottom: 0.75rem;">Répartition par secteur</h3>` +
+                Object.entries(sectorBreakdown)
+                .sort((a, b) => b[1] - a[1])
+                .map(([sector, count]) => `
+                    <div class="sector-row">
+                        <span>${sector}</span>
+                        <div class="sector-track"><div class="sector-fill" style="width: ${(count / max) * 100}%"></div></div>
+                        <strong>${count}</strong>
+                    </div>
+                `).join('');
+
+            listContainer.innerHTML = `
+                <h3 style="margin-bottom: 0.2rem;">Gestion rapide des entreprises</h3>
+                <p class="admin-note">Ajout bonus : marquage premium + suppression instantanée (démo locale).</p>
+            ` + companies.map(company => `
+                <div class="admin-item">
+                    <div class="admin-item-head">
+                        <div class="admin-item-name">${company.isFeatured ? '⭐ ' : ''}${company.name}</div>
+                        <div class="admin-actions">
+                            <button class="admin-action feature" onclick="toggleFeatured(${company.id})">${company.isFeatured ? 'Retirer' : 'Premium'}</button>
+                            <button class="admin-action delete" onclick="deleteCompany(${company.id})">Supprimer</button>
+                        </div>
+                    </div>
+                    <div class="admin-note">${company.sector} • ${company.metro}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggleAdminPanel(forceState) {
+            const panel = document.getElementById('admin-panel');
+            if (!panel) return;
+
+            const shouldOpen = typeof forceState === 'boolean' ? forceState : !panel.classList.contains('active');
+            panel.classList.toggle('active', shouldOpen);
+
+            if (shouldOpen) {
+                renderAdminDashboard();
+            }
+        }
+
+        function toggleFeatured(companyId) {
+            const company = companies.find(item => item.id === companyId);
+            if (!company) return;
+
+            company.isFeatured = !company.isFeatured;
+            displayCompanies(filteredCompanies);
+            renderAdminDashboard();
+        }
+
+        function deleteCompany(companyId) {
+            const index = companies.findIndex(item => item.id === companyId);
+            if (index === -1) return;
+
+            companies.splice(index, 1);
+            filteredCompanies = filteredCompanies.filter(item => item.id !== companyId);
+            displayCompanies(filteredCompanies);
+            renderAdminDashboard();
+        }
+
+        function toggleNightMode() {
+            document.body.classList.toggle('night-mode');
+        }
+
         // Initial display
         displayCompanies(filteredCompanies);
+        renderAdminDashboard();
     </script>
 </body>
 </html>
