@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <title>Stages Lille • Trouve ton stage facilement</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +16,7 @@
     <aside class="admin-panel" id="admin-panel">
         <div class="admin-header">
             <h2 class="admin-title">Admin Dashboard</h2>
-            <button class="admin-close" onclick="toggleAdminPanel(false)">✕</button>
+            <button class="admin-close" id="admin-close-button" type="button">✕</button>
         </div>
         <div class="admin-kpi-grid" id="admin-kpi-grid"></div>
         <div class="sector-bars" id="admin-sector-bars"></div>
@@ -29,7 +32,7 @@
                 </div>
                 <h1>Trouve ton stage à Lille</h1>
                 <p class="hero-subtitle">Recherche d'entreprises par proximité • Simple et rapide • Pour lycéens</p>
-                <button class="hero-mode-toggle" onclick="toggleNightMode()">🌙 Mode soirée</button>
+                <button class="hero-mode-toggle" id="night-mode-toggle" type="button">🌙 Mode soirée</button>
             </div>
         </div>
     </section>
@@ -54,7 +57,7 @@
                     <input type="text" id="search-input" placeholder="Nom de l'entreprise...">
                 </div>
             </div>
-            <button class="btn-search" onclick="filterCompanies()">Rechercher</button>
+            <button class="btn-search" id="search-button" type="button">Rechercher</button>
         </div>
     </div>
 
@@ -93,16 +96,14 @@
 
     <div class="modal" id="company-modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">✕</button>
+            <button class="modal-close" id="modal-close-button" type="button">✕</button>
             <div id="modal-body"></div>
         </div>
     </div>
 
-    <div class="admin-hint">Admin: Ctrl+Shift+A ou tapez “admin”</div>
-
     <footer>
         <p>Stages Lille • 2025 • Projet pour faciliter la recherche de stages obligatoires</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+        <p class="footer-note">
             Des questions ? Contactez votre établissement ou <a href="mailto:contact@stages-lille.fr">contact@stages-lille.fr</a>
         </p>
     </footer>
