@@ -1,11 +1,14 @@
 'use strict';
 
 let filteredCompanies = [...companies];
-let adminKeyBuffer = '';
 let adminSessionUnlocked = false;
-
-const ADMIN_PASSCODE = 'LilleAdmin2026!';
 const MAX_TEXT_LENGTH = 500;
+const ADMIN_CODE_STORAGE_KEY = 'stages_lille_admin_code';
+const NIGHT_MODE_STORAGE_KEY = 'stages_lille_night_mode';
+const MAX_ADMIN_ATTEMPTS = 5;
+const ADMIN_LOCK_TIME_MS = 10 * 60 * 1000;
+let adminFailedAttempts = 0;
+let adminLockedUntil = 0;
 
 const ui = {
     companiesGrid: document.getElementById('companies-grid'),
@@ -47,11 +50,12 @@ function normalizeLines(value) {
 
 function safePhoneHref(phone) {
     const safe = String(phone || '').replace(/[^\d+]/g, '');
-    return `tel:${safe}`;
+    return safe ? `tel:${safe}` : '#';
 }
 
 function safeMailHref(email) {
-    return `mailto:${encodeURIComponent(String(email || '').trim())}`;
+    const safe = String(email || '').trim();
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(safe) ? `mailto:${safe}` : '#';
 }
 
 function populateSelectOptions() {
@@ -271,7 +275,9 @@ function getSectorBreakdown() {
 function renderAdminDashboard() {
     const uniqueMetros = new Set(companies.map(company => company.metro)).size;
     const featured = companies.filter(company => company.isFeatured).length;
-    const averageTasks = (companies.reduce((sum, company) => sum + company.tasks.length, 0) / companies.length).toFixed(1);
+    const averageTasks = companies.length
+        ? (companies.reduce((sum, company) => sum + company.tasks.length, 0) / companies.length).toFixed(1)
+        : '0.0';
 
     ui.adminKpiGrid.innerHTML = `
         <div class="admin-kpi"><div class="admin-kpi-label">Организаций</div><div class="admin-kpi-value">${companies.length}</div></div>
@@ -281,7 +287,7 @@ function renderAdminDashboard() {
     `;
 
     const sectorBreakdown = getSectorBreakdown();
-    const max = Math.max(...Object.values(sectorBreakdown));
+    const max = Math.max(...Object.values(sectorBreakdown), 1);
     ui.adminSectorBars.innerHTML = '<h3 class="admin-subtitle">По секторам</h3>' + Object.entries(sectorBreakdown)
         .sort((a, b) => b[1] - a[1])
         .map(([sector, count]) => `<div class="sector-row"><span>${escapeHtml(sector)}</span><div class="sector-track"><div class="sector-fill" data-width="${(count / max) * 100}"></div></div><strong>${count}</strong></div>`)
@@ -307,15 +313,35 @@ function renderAdminDashboard() {
 
 function unlockAdmin() {
     if (adminSessionUnlocked) return true;
+    const now = Date.now();
+    if (now < adminLockedUntil) {
+        const minutesLeft = Math.ceil((adminLockedUntil - now) / 60000);
+        window.alert(`Доступ временно заблокирован. Повторите через ${minutesLeft} мин.`);
+        return false;
+    }
+
+    const configuredPasscode = window.localStorage.getItem(ADMIN_CODE_STORAGE_KEY);
+    if (!configuredPasscode) {
+        window.alert('Админ-панель отключена. Для включения задайте localStorage ключ stages_lille_admin_code.');
+        return false;
+    }
 
     const pass = window.prompt('Введите код администратора:');
     if (!pass) return false;
 
-    if (pass !== ADMIN_PASSCODE) {
+    if (pass !== configuredPasscode) {
+        adminFailedAttempts += 1;
+        if (adminFailedAttempts >= MAX_ADMIN_ATTEMPTS) {
+            adminLockedUntil = Date.now() + ADMIN_LOCK_TIME_MS;
+            adminFailedAttempts = 0;
+            window.alert('Слишком много попыток. Доступ временно заблокирован на 10 минут.');
+            return false;
+        }
         window.alert('Неверный код.');
         return false;
     }
 
+    adminFailedAttempts = 0;
     adminSessionUnlocked = true;
     return true;
 }
@@ -340,15 +366,16 @@ function toggleFeatured(companyId) {
 function deleteCompany(companyId) {
     const index = companies.findIndex(item => item.id === Number(companyId));
     if (index === -1) return;
+    if (!window.confirm('Удалить организацию? Это действие нельзя отменить.')) return;
 
     companies.splice(index, 1);
-    filteredCompanies = filteredCompanies.filter(item => item.id !== Number(companyId));
-    displayCompanies(filteredCompanies);
+    filterCompanies();
     renderAdminDashboard();
 }
 
 function toggleNightMode() {
-    document.body.classList.toggle('night-mode');
+    const enabled = document.body.classList.toggle('night-mode');
+    window.localStorage.setItem(NIGHT_MODE_STORAGE_KEY, enabled ? '1' : '0');
 }
 
 function initHiddenAdminShortcuts() {
@@ -364,13 +391,6 @@ function initHiddenAdminShortcuts() {
             return;
         }
 
-        if (event.key.length === 1) {
-            adminKeyBuffer = (adminKeyBuffer + event.key.toLowerCase()).slice(-5);
-            if (adminKeyBuffer === 'admin') {
-                toggleAdminPanel(true);
-                adminKeyBuffer = '';
-            }
-        }
     });
 }
 
@@ -419,6 +439,8 @@ function initListeners() {
 }
 
 function initApp() {
+    const nightModeEnabled = window.localStorage.getItem(NIGHT_MODE_STORAGE_KEY) === '1';
+    document.body.classList.toggle('night-mode', nightModeEnabled);
     populateSelectOptions();
     displayCompanies(filteredCompanies);
     initListeners();
