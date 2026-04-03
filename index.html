@@ -32,12 +32,16 @@
                 </div>
                 <h1>Trouve ton stage à Lille</h1>
                 <p class="hero-subtitle">Recherche d'entreprises par proximité • Simple et rapide • Pour lycéens</p>
+                <div class="hero-cta">
+                    <a class="hero-cta-btn primary" href="#search-zone">Explorer les stages</a>
+                    <a class="hero-cta-btn secondary" href="#socials">Nos réseaux</a>
+                </div>
                 <button class="hero-mode-toggle" id="night-mode-toggle" type="button">🌙 Mode soirée</button>
             </div>
         </div>
     </section>
 
-    <div class="container">
+    <div class="container" id="search-zone">
         <div class="search-section">
             <div class="filter-grid">
                 <div class="filter-group">
@@ -61,12 +65,51 @@
         </div>
     </div>
 
+    <section class="landing-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span class="stat-value" id="stats-companies">0</span>
+                    <span class="stat-label">organisations partenaires</span>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-value" id="stats-metros">0</span>
+                    <span class="stat-label">stations couvertes</span>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-value" id="stats-sectors">0</span>
+                    <span class="stat-label">secteurs d'activité</span>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <section class="results-section">
         <div class="container">
             <div class="results-header">
                 <div class="results-count"><strong id="results-count">0</strong> opportunités de stage trouvées</div>
             </div>
             <div class="companies-grid" id="companies-grid"></div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="benefits-title">Pourquoi utiliser Stages Lille ?</h2>
+            <div class="benefits-grid">
+                <article class="benefit-card">
+                    <h3>🎯 Recherche ciblée</h3>
+                    <p>Filtre rapidement par métro, secteur et nom pour identifier les stages pertinents en quelques secondes.</p>
+                </article>
+                <article class="benefit-card">
+                    <h3>🚀 Contact direct</h3>
+                    <p>Chaque fiche contient les coordonnées utiles pour envoyer ta candidature immédiatement.</p>
+                </article>
+                <article class="benefit-card">
+                    <h3>🛡️ Expérience plus sûre</h3>
+                    <p>Le site applique des contrôles de validation pour limiter les liens malformés et les entrées dangereuses.</p>
+                </article>
+            </div>
         </div>
     </section>
 
@@ -84,14 +127,13 @@
                 </details>
                 <details class="faq-item">
                     <summary>Comment accéder à l’admin cachée ?</summary>
-                    <p>Utilise <strong>Ctrl+Shift+A</strong> ou tape <strong>admin</strong> au clavier sur la page.</p>
+                    <p>Utilise <strong>Ctrl+Shift+A</strong> puis saisis le code administrateur configuré côté navigateur.</p>
                 </details>
                 <details class="faq-item">
                     <summary>Les nouvelles organisations sont-elles sauvegardées ?</summary>
                     <p>Pour l’instant, elles restent en mémoire dans la session du navigateur (pas de base de données).</p>
                 </details>
             </div>
-            <div class="companies-grid" id="companies-grid"></div>
         </div>
     </section>
 
@@ -107,6 +149,12 @@
         <p class="footer-note">
             Des questions ? Contactez votre établissement ou <a href="mailto:contact@stages-lille.fr">contact@stages-lille.fr</a>
         </p>
+        <div class="social-links" id="socials">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a>
+        </div>
     </footer>
 
     <script src="data.js"></script>
